@@ -17,10 +17,11 @@ Route::view('dashboard', 'dashboard')
 Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
-Route::get('/tasks/create', CreateTaskForm::class)->name('tasks.create');
-Route::get('/tasks', TaskList::class)->name('tasks.list');
+Route::get('/tasks/create', CreateTaskForm::class)->middleware(['auth'])->name('tasks.create');
+Route::get('/tasks', TaskList::class)->middleware(['auth'])->name('tasks.list');
 Route::get('/tasks/edit/{task}', function (Task $task) {
     return view('edit', ['task' => $task]);
-})->name('edit');
+})->middleware(['auth'])->name('edit');
+
 
 require __DIR__.'/auth.php';

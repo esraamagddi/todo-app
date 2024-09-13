@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Actions\ToDo\ChangeTaskStatusAction;
 use App\Actions\ToDo\CreateTaskAction;
 use App\Actions\ToDo\GetAllTasksAction;
 use App\Actions\ToDo\UpdateTaskAction;
@@ -14,12 +15,15 @@ class TaskService
     protected $createTaskAction;
     protected $getAllTasksAction;
     protected $updateTaskAction;
+    protected $changeTaskStatusAction;
 
-    public function __construct(CreateTaskAction $createTaskAction, GetAllTasksAction $getAllTasksAction, UpdateTaskAction $updateTaskAction)
+    public function __construct(CreateTaskAction $createTaskAction, GetAllTasksAction $getAllTasksAction,
+     UpdateTaskAction $updateTaskAction,ChangeTaskStatusAction $changeTaskStatusAction)
     {
         $this->createTaskAction = $createTaskAction;
         $this->getAllTasksAction = $getAllTasksAction;
         $this->updateTaskAction = $updateTaskAction;
+        $this->changeTaskStatusAction = $changeTaskStatusAction;
     }
 
     public function createTask(array $data)
@@ -53,6 +57,11 @@ class TaskService
             throw new ValidationException($validator);
         }
         return $this->updateTaskAction->execute($task, $data);
+    }
+
+    public function changeTaskStatus(Task $task)
+    {
+        return $this->changeTaskStatusAction->execute($task);
     }
 
 }

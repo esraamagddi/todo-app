@@ -21,6 +21,16 @@ class TaskList extends Component
         $this->taskService = app(TaskService::class);
     }
 
+        public function toggleStatus($taskId)
+    {
+        $task = Task::find($taskId);
+        if ($task) {
+            $task->completed = !$task->completed;
+            $task->save();
+        }
+
+    }
+
     public function render()
     {
         $tasks = Task::where('user_id', Auth::id())

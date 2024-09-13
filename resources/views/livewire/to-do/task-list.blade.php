@@ -6,6 +6,12 @@
         @forelse($tasks as $task)
             <div class="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden">
                 <div class="p-4">
+                    <div>
+                        <input type="checkbox" wire:click="toggleStatus({{ $task->id }})" {{ $task->completed ? 'checked' : '' }}>
+                        <span class="{{ $task->completed ? 'line-through text-green-500' : '' }}">
+                            {{ $task->title }}
+                        </span>
+                    </div>
                     <h4 class="text-lg font-semibold mb-2 text-gray-800">{{ $task->title }}</h4>
                     <p class="text-gray-600 mb-4">{{ $task->description ?: 'No description' }}</p>
                     <span class="inline-block px-2 py-1 text-xs font-medium {{ $task->completed ? 'bg-green-200 text-green-800' : 'bg-red-200 text-red-800' }} rounded-full">

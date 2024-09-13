@@ -6,8 +6,9 @@ use App\Models\Task;
 
 class GetAllTasksAction
 {
-    public function execute()
+    public function execute($perPage = 10)
     {
-        return Task::all();
+        return Task::paginate($perPage);
     }
+
 }

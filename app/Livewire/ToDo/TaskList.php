@@ -2,12 +2,17 @@
 
 namespace App\Livewire\ToDo;
 
+use App\Models\Task;
 use Livewire\Component;
+use Livewire\WithPagination;
 use App\Services\TaskService;
+use Illuminate\Support\Facades\Auth;
 
 class TaskList extends Component
 {
-    public $tasks;
+    use WithPagination;
+
+    public $perPage = 10;
 
     protected $taskService;
 
@@ -16,13 +21,12 @@ class TaskList extends Component
         $this->taskService = app(TaskService::class);
     }
 
-    public function mount()
-    {
-        $this->tasks = $this->taskService->getAllTasks();
-    }
-
     public function render()
     {
-        return view('livewire.to-do.task-list');
+        $tasks = Task::where('user_id', Auth::id())
+                     ->orderBy('created_at', 'desc')
+                     ->paginate(10);
+
+        return view('livewire.to-do.task-list', ['tasks' => $tasks]);
     }
 }

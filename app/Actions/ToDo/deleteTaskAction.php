@@ -8,6 +8,7 @@ class DeleteTaskAction
 {
     public function execute($taskId)
     {
-        Task::findOrFail($taskId)->delete();
+        $task = Task::findOrFail($taskId);
+        $task->delete();
     }
 }

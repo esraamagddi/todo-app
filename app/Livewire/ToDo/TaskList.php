@@ -3,19 +3,22 @@
 namespace App\Livewire\ToDo;
 
 use App\Models\Task;
-use Livewire\Component;
-use Livewire\WithPagination;
 use App\Services\TaskService;
 use Illuminate\Support\Facades\Auth;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\Component;
+use Livewire\WithPagination;
 
 class TaskList extends Component
 {
-    use WithPagination;
+    use WithPagination,LivewireAlert;
 
     public $perPage = 10;
 
+    public $taskIdBeingDeleted;
     protected $taskService;
 
+    protected $listeners = ['taskDeleted'];
     public function __construct()
     {
         $this->taskService = app(TaskService::class);
@@ -30,6 +33,12 @@ class TaskList extends Component
         }
 
     }
+    public function deleteTask($taskId)
+    {
+        Task::findOrFail($taskId)->delete();
+        $this->alert('success', 'Task deleted successfully!');
+    }
+
 
     public function render()
     {

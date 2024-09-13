@@ -13,10 +13,19 @@
                     </span>
                 </div>
                 <div class="p-4 border-t border-gray-200 bg-gray-50 flex justify-end space-x-2">
-                    <button wire:click="setSelectedTask({{ $task->id }})" class="text-blue-500 hover:text-blue-700">View</button>
-                    <button wire:click="setSelectedTask({{ $task->id }})" class="text-yellow-500 hover:text-yellow-700">Edit</button>
-                    <button wire:click="deleteTask({{ $task->id }})" class="text-red-500 hover:text-red-700">Delete</button>
+                    <button wire:click="setSelectedTask({{ $task->id }})" class="bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-lg px-4 py-2 text-sm font-medium">
+                        View
+                    </button>
+
+                    <button wire:click="setSelectedTask({{ $task->id }})" class="bg-yellow-500 text-white hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50 rounded-lg px-4 py-2 text-sm font-medium">
+                        Edit
+                    </button>
+
+                    <button wire:click="deleteTask({{ $task->id }})" class="bg-red-500 text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 rounded-lg px-4 py-2 text-sm font-medium">
+                        Delete
+                    </button>
                 </div>
+
             </div>
         @empty
             <div class="col-span-full text-center text-gray-500">No tasks available</div>

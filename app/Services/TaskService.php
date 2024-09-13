@@ -33,11 +33,11 @@ class TaskService
         return $this->createTaskAction->execute($data);
     }
 
-    public function getAllTasks($perPage = 10)
+    public function getAllTasks($perPage = 6)
     {
         return $this->getAllTasksAction->execute($perPage);
     }
 
-    
+
 
 }

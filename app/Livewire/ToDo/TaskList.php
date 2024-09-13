@@ -25,7 +25,7 @@ class TaskList extends Component
     {
         $tasks = Task::where('user_id', Auth::id())
                      ->orderBy('created_at', 'desc')
-                     ->paginate(10);
+                     ->paginate(6);
 
         return view('livewire.to-do.task-list', ['tasks' => $tasks]);
     }

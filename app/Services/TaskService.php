@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Actions\ToDo\ChangeTaskStatusAction;
 use App\Actions\ToDo\CreateTaskAction;
+use App\Actions\ToDo\DeleteTaskAction;
 use App\Actions\ToDo\GetAllTasksAction;
 use App\Actions\ToDo\UpdateTaskAction;
 use App\Models\Task;
@@ -16,14 +17,17 @@ class TaskService
     protected $getAllTasksAction;
     protected $updateTaskAction;
     protected $changeTaskStatusAction;
+    protected $deleteTaskAction;
 
     public function __construct(CreateTaskAction $createTaskAction, GetAllTasksAction $getAllTasksAction,
-     UpdateTaskAction $updateTaskAction,ChangeTaskStatusAction $changeTaskStatusAction)
+     UpdateTaskAction $updateTaskAction,ChangeTaskStatusAction $changeTaskStatusAction,
+     DeleteTaskAction $deleteTaskAction)
     {
         $this->createTaskAction = $createTaskAction;
         $this->getAllTasksAction = $getAllTasksAction;
         $this->updateTaskAction = $updateTaskAction;
         $this->changeTaskStatusAction = $changeTaskStatusAction;
+        $this->deleteTaskAction = $deleteTaskAction;
     }
 
     public function createTask(array $data)
@@ -64,4 +68,8 @@ class TaskService
         return $this->changeTaskStatusAction->execute($task);
     }
 
+    public function deleteTask($taskId)
+    {
+        return $this->deleteTaskAction->execute($taskId);
+    }
 }

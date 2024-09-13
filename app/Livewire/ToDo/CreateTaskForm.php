@@ -36,8 +36,9 @@ class CreateTaskForm extends Component
 
         $this->reset(['title', 'description']);
 
-        session()->flash('message', 'Task created successfully!');
         $this->dispatch('taskAdded');
+        session()->flash('message', 'Task created successfully!');
+
     }
 
     public function render()

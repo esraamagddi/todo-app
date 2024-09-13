@@ -2,16 +2,20 @@
 namespace App\Services;
 
 use App\Actions\ToDo\CreateTaskAction;
+use App\Actions\ToDo\GetAllTasksAction;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 
 class TaskService
 {
     protected $createTaskAction;
+    protected $getAllTasksAction;
 
-    public function __construct(CreateTaskAction $createTaskAction)
+    public function __construct(CreateTaskAction $createTaskAction,GetAllTasksAction $getAllTasksAction)
     {
         $this->createTaskAction = $createTaskAction;
+        $this->getAllTasksAction = $getAllTasksAction;
+
     }
 
     public function createTask(array $data)
@@ -27,6 +31,11 @@ class TaskService
         }
 
         return $this->createTaskAction->execute($data);
+    }
+
+    public function getAllTasks()
+    {
+        return $this->getAllTasksAction->execute();
     }
 
 }

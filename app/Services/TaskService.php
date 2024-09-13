@@ -52,6 +52,7 @@ class TaskService
         if ($validator->fails()) {
             throw new ValidationException($validator);
         }
+        return $this->updateTaskAction->execute($task, $data);
     }
 
 }

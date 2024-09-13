@@ -2,6 +2,7 @@
 
 use App\Livewire\ToDo\CreateTaskForm;
 use App\Livewire\ToDo\TaskList;
+use App\Models\Task;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome');
@@ -18,5 +19,8 @@ Route::view('profile', 'profile')
     ->name('profile');
 Route::get('/tasks/create', CreateTaskForm::class)->name('tasks.create');
 Route::get('/tasks', TaskList::class)->name('tasks.list');
+Route::get('/tasks/edit/{task}', function (Task $task) {
+    return view('edit', ['task' => $task]);
+})->name('edit');
 
 require __DIR__.'/auth.php';

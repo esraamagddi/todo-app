@@ -45,10 +45,10 @@
                         View
                     </button>
 
-                    <button wire:click="setSelectedTask({{ $task->id }})"
-                        class="bg-yellow-500 text-white hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50 rounded-lg px-4 py-2 text-sm font-medium">
+                    <a href="{{ route('edit', ['task' => $task->id]) }}" class="bg-yellow-500 text-white hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50 rounded-lg px-4 py-2 text-sm font-medium">
                         Edit
-                    </button>
+                    </a>
+
 
 
                     <button type="button" wire:click="deleteTask({{ $task->id }})"

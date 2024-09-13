@@ -1,6 +1,20 @@
 <div class="p-6 bg-white shadow-md rounded-lg">
     <h3 class="text-2xl font-semibold mb-6 text-gray-800">All Tasks</h3>
 
+    <!-- Filter Buttons -->
+<div class="mb-4">
+    <button wire:click="setFilter('all')" class="bg-gray-500 text-white hover:bg-gray-600 rounded-lg px-4 py-2 text-sm">
+        All
+    </button>
+    <button wire:click="setFilter('completed')" class="bg-green-500 text-white hover:bg-green-600 rounded-lg px-4 py-2 text-sm">
+        Completed
+    </button>
+    <button wire:click="setFilter('pending')" class="bg-red-500 text-white hover:bg-red-600 rounded-lg px-4 py-2 text-sm">
+        Pending
+    </button>
+</div>
+
+
     <!-- Task Cards -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         @forelse($tasks as $task)

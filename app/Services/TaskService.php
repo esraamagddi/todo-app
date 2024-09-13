@@ -2,10 +2,13 @@
 
 namespace App\Services;
 
+
 use App\Actions\ToDo\ChangeTaskStatusAction;
 use App\Actions\ToDo\CreateTaskAction;
 use App\Actions\ToDo\DeleteTaskAction;
 use App\Actions\ToDo\GetAllTasksAction;
+use App\Actions\ToDo\GetCompletedTasksAction as ToDoGetCompletedTasksAction;
+use App\Actions\ToDo\GetPendingTasksAction as ToDoGetPendingTasksAction;
 use App\Actions\ToDo\UpdateTaskAction;
 use App\Models\Task;
 use Illuminate\Support\Facades\Validator;
@@ -18,16 +21,21 @@ class TaskService
     protected $updateTaskAction;
     protected $changeTaskStatusAction;
     protected $deleteTaskAction;
-
+    protected $getCompletedTasksAction;
+    protected $getPendingTasksAction;
     public function __construct(CreateTaskAction $createTaskAction, GetAllTasksAction $getAllTasksAction,
      UpdateTaskAction $updateTaskAction,ChangeTaskStatusAction $changeTaskStatusAction,
-     DeleteTaskAction $deleteTaskAction)
+     DeleteTaskAction $deleteTaskAction,
+     ToDoGetCompletedTasksAction $getCompletedTasksAction,
+        ToDoGetPendingTasksAction $getPendingTasksAction)
     {
         $this->createTaskAction = $createTaskAction;
         $this->getAllTasksAction = $getAllTasksAction;
         $this->updateTaskAction = $updateTaskAction;
         $this->changeTaskStatusAction = $changeTaskStatusAction;
         $this->deleteTaskAction = $deleteTaskAction;
+        $this->getCompletedTasksAction = $getCompletedTasksAction;
+        $this->getPendingTasksAction = $getPendingTasksAction;
     }
 
     public function createTask(array $data)
@@ -71,5 +79,15 @@ class TaskService
     public function deleteTask($taskId)
     {
         return $this->deleteTaskAction->execute($taskId);
+    }
+
+    public function getCompletedTasks($perPage = 6)
+    {
+        return $this->getCompletedTasksAction->execute($perPage);
+    }
+
+    public function getPendingTasks($perPage = 6)
+    {
+        return $this->getPendingTasksAction->execute($perPage);
     }
 }

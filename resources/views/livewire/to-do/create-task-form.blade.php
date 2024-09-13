@@ -17,18 +17,3 @@
         </div>
     </form>
 </div>
-
-<!-- Add JavaScript to handle SweetAlert -->
-<script>
-    document.addEventListener('livewire:load', function () {
-        Livewire.on('taskAdded', function () {
-            // Show SweetAlert on task added
-            Swal.fire({
-                title: 'Success!',
-                text: 'Task created successfully!',
-                icon: 'success',
-                confirmButtonText: 'OK'
-            });
-        });
-    });
-</script>

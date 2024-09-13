@@ -6,9 +6,12 @@ use App\Models\Task;
 use App\Services\TaskService;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class CreateTaskForm extends Component
 {
+    use LivewireAlert;
+
     public $title;
     public $description;
 
@@ -37,8 +40,7 @@ class CreateTaskForm extends Component
         $this->reset(['title', 'description']);
 
         $this->dispatch('taskAdded');
-        session()->flash('message', 'Task created successfully!');
-
+        $this->alert('success', 'task added successfully !');
     }
 
     public function render()

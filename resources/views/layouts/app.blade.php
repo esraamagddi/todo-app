@@ -16,7 +16,12 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">
+        @livewireScripts
+        @include('sweetalert::alert')
         @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+        <x-livewire-alert::scripts />
         <div class="min-h-screen bg-gray-100">
             <livewire:layout.navigation />
 

@@ -1,10 +1,4 @@
 <div>
-    @if (session()->has('message'))
-        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
-            <span class="block sm:inline">{{ session('message') }}</span>
-        </div>
-    @endif
-
     <form wire:submit.prevent="submit">
         <div class="mb-4">
             <label for="title" class="block text-gray-700">Title:</label>
@@ -19,7 +13,22 @@
         </div>
 
         <div class="mb-4">
-            <button type="submit" class="bg-blue-500 text-black py-2 px-4 rounded">Create Task</button>
+            <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded">Create Task</button>
         </div>
     </form>
 </div>
+
+<!-- Add JavaScript to handle SweetAlert -->
+<script>
+    document.addEventListener('livewire:load', function () {
+        Livewire.on('taskAdded', function () {
+            // Show SweetAlert on task added
+            Swal.fire({
+                title: 'Success!',
+                text: 'Task created successfully!',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
+        });
+    });
+</script>

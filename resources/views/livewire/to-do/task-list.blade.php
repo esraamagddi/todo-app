@@ -18,7 +18,7 @@
     <!-- Task Cards -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         @forelse($tasks as $task)
-            <div class="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden">
+            <div class="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden " wire:key="task-{{ $task->id }}">
                 <div class="p-4">
                     <div>
                         <!-- Task Checkbox -->
@@ -39,17 +39,11 @@
                 </div>
 
                 <!-- Action Buttons -->
-                <div class="p-4 border-t border-gray-200 bg-gray-50 flex justify-end space-x-2">
-                    <button wire:click="setSelectedTask({{ $task->id }})"
-                        class="bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-lg px-4 py-2 text-sm font-medium">
-                        View
-                    </button>
+                <div class="p-4 border-t border-gray-200 bg-gray-50 flex justify-center space-x-2">
 
                     <a href="{{ route('edit', ['task' => $task->id]) }}" class="bg-yellow-500 text-white hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50 rounded-lg px-4 py-2 text-sm font-medium">
                         Edit
                     </a>
-
-
 
                     <button type="button" wire:click="deleteTask({{ $task->id }})"
                         wire:confirm="Are you sure you want to delete this post?"

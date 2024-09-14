@@ -59,7 +59,7 @@ class TaskList extends Component
     public function render()
     {
         $tasks = $this->getFilteredTasks();
-
+        
         return view('livewire.to-do.task-list', ['tasks' => $tasks]);
     }
 }

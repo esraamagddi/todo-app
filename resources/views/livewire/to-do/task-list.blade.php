@@ -18,7 +18,7 @@
     <!-- Task Cards -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         @forelse($tasks as $task)
-            <div class="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden">
+            <div class="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden " wire:key="task-{{ $task->id }}">
                 <div class="p-4">
                     <div>
                         <!-- Task Checkbox -->

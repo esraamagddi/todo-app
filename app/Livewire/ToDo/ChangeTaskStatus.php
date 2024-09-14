@@ -1,45 +1,39 @@
 <?php
 
-namespace App\Http\Livewire\ToDo;
+namespace App\Livewire\ToDo;
 
 use Livewire\Component;
 use App\Models\Task;
 use Illuminate\Support\Facades\Auth;
+use Livewire\WithPagination;
 
-class ChangeTaskStatusComponent extends Component
+class ChangeTaskStatus extends Component
 {
-    public $tasks;
-
-    public function mount()
-    {
-        $this->tasks = Task::where('user_id', Auth::id())->paginate(10);
-    }
+    use WithPagination;
 
     public function toggleStatus($taskId)
     {
         $task = Task::find($taskId);
-        if ($task) {
+        if ($task && $task->user_id === Auth::id()) {
             $task->completed = !$task->completed;
             $task->save();
         }
-
-        $this->tasks = Task::where('user_id', Auth::id())->paginate(10);
     }
 
     public function deleteTask($taskId)
     {
         $task = Task::find($taskId);
-        if ($task) {
+        if ($task && $task->user_id === Auth::id()) {
             $task->delete();
         }
-
-        $this->tasks = Task::where('user_id', Auth::id())->paginate(10);
     }
 
     public function render()
     {
+        $tasks = Task::where('user_id', Auth::id())->paginate(10);
+
         return view('livewire.to-do.task-list', [
-            'tasks' => $this->tasks
+            'tasks' => $tasks
         ]);
     }
 }

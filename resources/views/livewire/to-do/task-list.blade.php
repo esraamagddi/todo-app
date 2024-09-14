@@ -46,7 +46,7 @@
                     </a>
 
                     <button type="button" wire:click="deleteTask({{ $task->id }})"
-                        wire:confirm="Are you sure you want to delete this post?"
+                        wire:confirm="Are you sure you want to delete this task?"
                         class="bg-red-500 text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 rounded-lg px-4 py-2 text-sm font-medium">
                         Delete
                     </button>
